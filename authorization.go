@@ -6,15 +6,15 @@ import (
 
 //Sale returns the payment/sale authorization
 //Endpoint POST /1/sales
-func (c *Client) Authorization(payment *Payment) (*Payment, error) {
-	req, err := c.NewRequest("POST", fmt.Sprintf("%s%s", c.Environment.APIUrl, "/1/sales/"), payment)
+func (c *Client) Authorization(sale *Sale) (*Sale, error) {
+	req, err := c.NewRequest("POST", fmt.Sprintf("%s%s", c.Environment.APIUrl, "/1/sales/"), sale)
 
-	salePayment := &Payment{}
+	salePayed := &Sale{}
 
 	if err != nil {
-		return salePayment, err
+		return salePayed, err
 	}
 
-	err = c.Send(req, salePayment)
-	return salePayment, nil
+	err = c.Send(req, salePayed)
+	return salePayed, nil
 }
