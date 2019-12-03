@@ -63,6 +63,7 @@ type (
 		Recurrent           bool              `json:",omitempty"`
 		RecurrentPayment    *RecurrentPayment `json:",omitempty"`
 		CreditCard          *CreditCard       `json:",omitempty"`
+		DebitCard           *DebitCard        `json:",omitempty"`
 		Tid                 string            `json:",omitempty"`
 		ProofOfSale         string            `json:",omitempty"`
 		AuthorizationCode   string            `json:",omitempty"`
@@ -112,6 +113,27 @@ type (
 		Brand          string   `json:",omitempty"`
 		CardToken      string   `json:",omitempty"`
 		Links          []*Links `json:",omitempty"`
+	}
+
+	DebitCard struct {
+		CardNumber                  string           `json:",omitempty"`
+		CustomerName                string           `json:",omitempty"`
+		Authenticate                bool             `json:",omitempty"`
+		ReturnUrl                   string           `json:",omitempty"`
+		IsCryptoCurrencyNegotiation bool             `json:",omitempty"`
+		Holder                      string           `json:",omitempty"`
+		ExpirationDate              string           `json:",omitempty"`
+		RecurrentPayment            RecurrentPayment `json:",omitempty"`
+		SecurityCode                string           `json:",omitempty"`
+		CardOnFile                  CardOnFile       `json:",omitempty"`
+		Brand                       string           `json:",omitempty"`
+		CardToken                   string           `json:",omitempty"`
+		Links                       []*Links         `json:",omitempty"`
+	}
+
+	CardOnFile struct {
+		Usage  string `json:",omitempty"`
+		Reason string `json:",omitempty"`
 	}
 )
 
