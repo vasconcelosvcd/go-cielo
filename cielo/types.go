@@ -112,7 +112,7 @@ type (
 		SaveCard       bool     `json:",omitempty"`
 		Brand          string   `json:",omitempty"`
 		CardToken      string   `json:",omitempty"`
-		Links          []*Links `json:",omitempty"`
+		Links          []*Links `json:"-"`
 	}
 
 	DebitCard struct {

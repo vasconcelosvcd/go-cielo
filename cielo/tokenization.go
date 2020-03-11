@@ -16,15 +16,18 @@ func (c *Client) CreateTokenizeCard(creditCard *CreditCard) (*CreditCard, error)
 		return cCard, err
 	}
 
-	err = c.Send(req, cCard)
-	return cCard, nil
+	err = c.Send(req, creditCard)
+	if err != nil {
+		return cCard, err
+	}
+	return creditCard, err
 }
 
 //CreateTokenizeCard returns some card information
 //Endpoint GET /1/card/{TOKEN}
 func (c *Client) GetTokenizeCard(cardToken string) (*CreditCard, error) {
 	buf := bytes.NewBuffer([]byte(""))
-	req, err := c.NewRequest("GET", fmt.Sprintf("%s%s%s", c.Environment.APIUrl, "/1/card/", cardToken), buf)
+	req, err := c.NewRequest("GET", fmt.Sprintf("%s%s%s", c.Environment.APIQueryURL, "/1/card/", cardToken), buf)
 
 	cCard := &CreditCard{}
 
@@ -33,5 +36,5 @@ func (c *Client) GetTokenizeCard(cardToken string) (*CreditCard, error) {
 	}
 
 	err = c.Send(req, cCard)
-	return cCard, nil
+	return cCard, err
 }
