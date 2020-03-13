@@ -1,4 +1,4 @@
-package cielo
+package main
 
 import (
 	"fmt"

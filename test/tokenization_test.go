@@ -1,17 +1,17 @@
 package test
 
 import (
-	"github.com/vasconcelosvcd/go-cielo/cielo"
+	"github.com/vasconcelosvcd/go-cielo"
 	"os"
 	"testing"
 )
 
 func TestTokenize(t *testing.T){
-	c,err := cielo.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), cielo.SandboxEnvironment)
+	c,err := main.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), main.SandboxEnvironment)
 	if err!= nil{
 		println(err.Error())
 	}
-	cc:=cielo.CreditCard{
+	cc:= main.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
 		Holder:         "Teste Holder",
@@ -22,7 +22,6 @@ func TestTokenize(t *testing.T){
 	_,err =c.CreateTokenizeCard(&cc)
 
 
-	//t := http.NewRequest("GET", "www.google.com","")
 	if err!=nil{
 		print(err.Error())
 	}
@@ -32,11 +31,11 @@ func TestTokenize(t *testing.T){
 }
 
 func TestGetTokenized(t *testing.T){
-	c,err := cielo.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), cielo.SandboxEnvironment)
+	c,err := main.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), main.SandboxEnvironment)
 	if err!= nil{
 		println(err.Error())
 	}
-	cc:=cielo.CreditCard{
+	cc:= main.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
 		Holder:         "Teste Holder",
