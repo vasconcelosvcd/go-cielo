@@ -1,4 +1,4 @@
-package main
+package cielo
 
 var (
 	// ProductionEnvironment sets the environment to production
