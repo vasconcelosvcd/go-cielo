@@ -35,21 +35,19 @@ func (c *Client) Send(req *http.Request, v interface{}) error {
 		data []byte
 	)
 
-	// Set default headers
+	//// Set default headers
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Accept-Language", "en_US")
-
-	// Default values for headers
+	//Default values for headers
 	if req.Header.Get("Content-type") == "" {
 		req.Header.Set("Content-type", "application/json")
 	}
 
-	req.Header.Add("Accept-Encoding", "gzip")
+	req.Header.Add("Accept-Encoding", "gzip, deflate, br")
 	req.Header.Add("User-Agent", "CieloEcommerce/3.0 GoCielo")
 	req.Header.Add("MerchantId", c.MerchantId)
 	req.Header.Add("MerchantKey", c.MerchantKey)
 	req.Header.Add("RequestId", uuid.NewV5(uuid.NamespaceX500, "go-cielo").String())
-
 	resp, err = c.Client.Do(req)
 	c.log(req, resp)
 
@@ -110,5 +108,6 @@ func (c *Client) NewRequest(method, url string, payload interface{}) (*http.Requ
 		}
 		buf = bytes.NewBuffer(b)
 	}
+
 	return http.NewRequest(method, url, buf)
 }
