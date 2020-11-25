@@ -2,12 +2,11 @@ package test
 
 import (
 	"github.com/vasconcelosvcd/go-cielo"
-	"os"
 	"testing"
 )
 
 func TestTokenize(t *testing.T) {
-	c, err := cielo.NewClient(os.Getenv("MERCHANT_ID"), os.Getenv("MERCHANT_KEY"), cielo.SandboxEnvironment)
+	c, err := getNewClient(true, t)
 	if err != nil {
 		t.Error(err.Error())
 	}
@@ -37,7 +36,7 @@ func TestTokenize(t *testing.T) {
 }
 
 func TestGetTokenized(t *testing.T) {
-	c, err := cielo.NewClient(os.Getenv("MERCHANT_ID"), os.Getenv("MERCHANT_KEY"), cielo.SandboxEnvironment)
+	c, err := getNewClient(true, t)
 	if err != nil {
 		t.Error(err.Error())
 	}
