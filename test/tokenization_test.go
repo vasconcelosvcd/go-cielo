@@ -2,16 +2,19 @@ package test
 
 import (
 	"github.com/vasconcelosvcd/go-cielo"
-	"os"
 	"testing"
 )
 
-func TestTokenize(t *testing.T){
-	c,err := main.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), main.SandboxEnvironment)
-	if err!= nil{
-		println(err.Error())
+func TestTokenize(t *testing.T) {
+	c, err := getNewClient(true, t)
+	if err != nil {
+		t.Error(err.Error())
 	}
-	cc:= main.CreditCard{
+	if c == nil {
+		t.Fatal("Client must not be nil")
+	}
+
+	cc := cielo.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
 		Holder:         "Teste Holder",
@@ -19,23 +22,29 @@ func TestTokenize(t *testing.T){
 		SaveCard:       true,
 		Brand:          "Master",
 	}
-	_,err =c.CreateTokenizeCard(&cc)
 
-
-	if err!=nil{
-		print(err.Error())
+	token, err := c.CreateTokenizeCard(&cc)
+	if err != nil {
+		t.Error(err.Error())
 	}
-	if  len(cc.CardToken)<=0 {
-		t.Error("Não foi gerado o token do cartao \n "+ err.Error())
+	if token == nil {
+		t.Fatal("Token must not be nil")
+	}
+	if len(token.CardToken) <= 0 {
+		t.Error("Não foi gerado o token do cartao")
 	}
 }
 
-func TestGetTokenized(t *testing.T){
-	c,err := main.NewClient(os.Getenv("MERCHANT_ID"),os.Getenv("MERCHANT_KEY"), main.SandboxEnvironment)
-	if err!= nil{
-		println(err.Error())
+func TestGetTokenized(t *testing.T) {
+	c, err := getNewClient(true, t)
+	if err != nil {
+		t.Error(err.Error())
 	}
-	cc:= main.CreditCard{
+	if c == nil {
+		t.Fatal("Client must not be nil")
+	}
+
+	cc := cielo.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
 		Holder:         "Teste Holder",
@@ -43,21 +52,26 @@ func TestGetTokenized(t *testing.T){
 		SaveCard:       true,
 		Brand:          "Master",
 	}
-	_,err =c.CreateTokenizeCard(&cc)
 
-
-	//t := http.NewRequest("GET", "www.google.com","")
-	if err!=nil{
+	token, err := c.CreateTokenizeCard(&cc)
+	if err != nil {
 		t.Error(err.Error())
 	}
-	if  len(cc.CardToken)<=0 {
-		t.Error("Não foi gerado o token do cartao \n "+ err.Error())
+	if token == nil {
+		t.Fatal("Token must not be nil")
 	}
-	getCard,err:= c.GetTokenizeCard(cc.CardToken)
-	if err!=nil{
+	if len(token.CardToken) <= 0 {
+		t.Error("Não foi gerado o token do cartao")
+	}
+
+	tokenizedCard, err := c.GetTokenizeCard(token.CardToken)
+	if err != nil {
 		t.Error(err.Error())
 	}
-	if  len(getCard.CardNumber)<=0 {
-		t.Error("Não foi gerado o token do cartao \n "+ err.Error())
+	if tokenizedCard == nil {
+		t.Fatal("Tokenized card must not be nil")
+	}
+	if len(tokenizedCard.CardNumber) <= 0 {
+		t.Error("Não foi gerado o token do cartao")
 	}
 }
