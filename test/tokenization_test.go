@@ -17,7 +17,7 @@ func TestTokenize(t *testing.T) {
 	cc := cielo.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
-		Holder:         "Teste Holder",
+		Holder:         "Tester Holder",
 		ExpirationDate: "11/2026",
 		SaveCard:       true,
 		Brand:          "Master",
@@ -31,7 +31,7 @@ func TestTokenize(t *testing.T) {
 		t.Fatal("Token must not be nil")
 	}
 	if len(token.CardToken) <= 0 {
-		t.Error("Não foi gerado o token do cartao")
+		t.Error("CC Token was not generated")
 	}
 }
 
@@ -47,7 +47,7 @@ func TestGetTokenized(t *testing.T) {
 	cc := cielo.CreditCard{
 		CardNumber:     "5247712516640978",
 		CustomerName:   "Tester Name",
-		Holder:         "Teste Holder",
+		Holder:         "Tester Holder",
 		ExpirationDate: "11/2026",
 		SaveCard:       true,
 		Brand:          "Master",
@@ -61,7 +61,7 @@ func TestGetTokenized(t *testing.T) {
 		t.Fatal("Token must not be nil")
 	}
 	if len(token.CardToken) <= 0 {
-		t.Error("Não foi gerado o token do cartao")
+		t.Error("CC Token was not generated")
 	}
 
 	tokenizedCard, err := c.GetTokenizeCard(token.CardToken)
@@ -72,6 +72,6 @@ func TestGetTokenized(t *testing.T) {
 		t.Fatal("Tokenized card must not be nil")
 	}
 	if len(tokenizedCard.CardNumber) <= 0 {
-		t.Error("Não foi gerado o token do cartao")
+		t.Error("CC Token was not generated")
 	}
 }

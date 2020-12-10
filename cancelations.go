@@ -18,6 +18,9 @@ func (c *Client) CancelByPaymentId(paymentId string) (*Payment, error) {
 	}
 
 	err = c.Send(req, salePayment)
+	if err != nil {
+		return salePayment, err
+	}
 	return salePayment, nil
 }
 
@@ -34,5 +37,25 @@ func (c *Client) CancelByMerchantOrderId(mOrderId string) (*Payment, error) {
 	}
 
 	err = c.Send(req, salePayment)
+	if err != nil {
+		return salePayment, err
+	}
 	return salePayment, nil
+}
+
+//CancelRecurrentPayment returns the payment/sale of cancel by PaymentId
+//Endpoint PUT /1/RecurrentPayment/{RecurrentPaymentId}/Payment
+func (c *Client) CancelRecurrentPayment(paymentId string) error {
+	buf := bytes.NewBuffer([]byte(""))
+	req, err := c.NewRequest("PUT", fmt.Sprintf("%s%s%s%s", c.Environment.APIUrl, "/1/RecurrentPayment/", paymentId, "/Deactivate"), buf)
+
+	if err != nil {
+		return err
+	}
+
+	err = c.Send(req, nil)
+	if err != nil {
+		return err
+	}
+	return nil
 }

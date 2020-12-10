@@ -16,5 +16,8 @@ func (c *Client) Authorization(sale *Sale) (*Sale, error) {
 	}
 
 	err = c.Send(req, salePayed)
+	if err != nil {
+		return salePayed, err
+	}
 	return salePayed, nil
 }
