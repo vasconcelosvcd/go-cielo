@@ -9,11 +9,9 @@ This lib contains an client for Cielo REST API
 
 
 ### TODOS:
-- [ ] Tests!!
-- [ ] Better constant types
-- [ ] Better constant types for currency
-- [ ] One model per request/response
-- [ ] One request/response per model
+- Tests!!
+- Better constant types
+- Better constant types for currency
   
 ### Installation
 ```sh
@@ -48,7 +46,7 @@ if err != nil {
 
 ```
 
-### Sale (Using an tokenized card)
+### Sale (Using a tokenized card)
 
 ```golang
 sale := cielo.Sale{
