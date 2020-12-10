@@ -19,7 +19,7 @@ func Test_SaleCreditCard(t *testing.T) {
 		sale := cielo.Sale{
 			MerchantOrderID: "12387197ads89d7a",
 			Customer: &cielo.Customer{
-				Name: "CustomerTest",
+				Name: "Customer Test",
 			},
 			Payment: &cielo.Payment{
 				SoftDescriptor: "Simple Sale",
@@ -31,7 +31,7 @@ func Test_SaleCreditCard(t *testing.T) {
 					CustomerName:   "Tester Name",
 					Holder:         "Tester Holder",
 					ExpirationDate: "11/2026",
-					SaveCard:       true,
+					SaveCard:       false,
 					Brand:          "Master",
 				},
 			},
