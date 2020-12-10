@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestTokenize(t *testing.T) {
+func Test_Tokenize(t *testing.T) {
 	c, err := getNewClient(true, t)
 	if err != nil {
 		t.Error(err.Error())
@@ -35,7 +35,7 @@ func TestTokenize(t *testing.T) {
 	}
 }
 
-func TestGetTokenized(t *testing.T) {
+func Test_GetTokenized(t *testing.T) {
 	c, err := getNewClient(true, t)
 	if err != nil {
 		t.Error(err.Error())
