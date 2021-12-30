@@ -1,8 +1,9 @@
 package test
 
 import (
-	"github.com/vasconcelosvcd/go-cielo"
 	"testing"
+
+	"github.com/vasconcelosvcd/go-cielo"
 )
 
 func Test_SaleCreditCard(t *testing.T) {
